@@ -8,8 +8,9 @@ describe('Output validation', () => {
     expect(global.setTimeout.mock.calls[0][1]).toBe(300);
   });
   test('Printed TIMED OUT!', () => {
-    global.console.log = jest.fn();
+    global.setTimeout = jest.fn();
     printTimeout('TIMED OUT!', 300);
-    expect(global.console.log).toHaveBeenCalledWith('TIMED OUT!');
+    expect(global.setTimeout.mock.calls[0][0]).toBe(console.log);
+    expect(global.setTimeout.mock.calls[0][2]).toBe('TIMED OUT!');
   });
 });
